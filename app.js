@@ -38,6 +38,38 @@ app.get("/blog",async (req,res)=>{
     })
 })
 
+app.get("/blog/:id",async(req,res)=>{
+    var id = req.params.id
+    var blog = await Blog.findById(id) //always return object
+    res.json({
+        data:blog
+    })
+
+})
+
+app.delete("/blog/:id",async (req,res)=>{
+    var id = req.params.id
+    await Blog.findByIdAndDelete(id)
+    res.json({
+        mes : "deleted successfully"
+    })
+})
+
+
+app.patch("/blog/:id",async (req,res)=>{
+    var id = req.params.id
+    var{title,subtitle,description} = req.body
+    await Blog.findByIdAndUpdate(id,{
+        title : "sakar",
+        subtitle : "paudel",
+        description
+    }) 
+    res.json({
+        mes : "updated"
+    })
+})
+
+
 app.listen(3000,()=>{
     console.log("saksham")
 })
