@@ -2,6 +2,12 @@ var express =  require("express")  //function
 const DatabaseConnect = require("./database")
 const Blog = require("./model/blogmodel")
 var app = express()
+var cors = require("cors")
+
+
+app.use(cors({
+    origin : "http://localhost:5173"  // * for giving acces to all
+}))
 
 app.use(express.json())
 
@@ -20,7 +26,7 @@ app.post("/blog",async (req,res)=>{
     var subtitle = req.body.subtitle
     var description = req.body.description
     // alternative var {title,subtitle,descripiton} = req.body
-    await Blog.create({
+    await Blog.create({     //BLOG CRETA KO HALKA VANU PARO ????
         title : title,
         subtitle : subtitle,
         description : description
@@ -39,7 +45,7 @@ app.get("/blog",async (req,res)=>{
 })
 
 app.get("/blog/:id",async(req,res)=>{
-    var id = req.params.id
+    var id = req.params.id         //params ko kam ????
     var blog = await Blog.findById(id) //always return object
     res.json({
         data:blog
