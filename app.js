@@ -31,7 +31,7 @@ app.post("/blog",async (req,res)=>{
         subtitle : subtitle,
         description : description
     })
-    res.json({
+    res.status(200).json({
         msg : "Blog success"
     })
 })
@@ -39,7 +39,7 @@ app.post("/blog",async (req,res)=>{
 
 app.get("/blog",async (req,res)=>{
     var blog = await Blog.find() //find lay array ma data dinxa
-    res.json({
+    res.status(200).json({
         data : blog
     })
 })
@@ -47,7 +47,7 @@ app.get("/blog",async (req,res)=>{
 app.get("/blog/:id",async(req,res)=>{
     var id = req.params.id         //params ko kam ????
     var blog = await Blog.findById(id) //always return object
-    res.json({
+    res.status(200).json({
         data:blog
     })
 
@@ -56,7 +56,7 @@ app.get("/blog/:id",async(req,res)=>{
 app.delete("/blog/:id",async (req,res)=>{
     var id = req.params.id
     await Blog.findByIdAndDelete(id)
-    res.json({
+    res.status(200).json({
         mes : "deleted successfully"
     })
 })
@@ -70,7 +70,7 @@ app.patch("/blog/:id",async (req,res)=>{
         subtitle : "paudel",
         description
     }) 
-    res.json({
+    res.status(200).json({
         mes : "updated"
     })
 })
